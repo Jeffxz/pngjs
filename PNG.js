@@ -162,7 +162,12 @@ PNG.prototype.getPixel = function(x, y){
 			this.palette[pixels[i] * 3 + 1],
 			this.palette[pixels[i] * 3 + 2],
 			alpha];
-		case 4: return [pixels[i], pixels[i], pixels[i], pixels[i + 1]];
+		case 4:
+			if (this.bitDepth == 8) {
+				return [pixels[i], pixels[i], pixels[i], pixels[i + 1]];
+			} else {
+				return [pixels[i + 1], pixels[i + 1], pixels[i + 1], pixels[i + 3]];
+			}
 		case 6: return [pixels[i], pixels[i + 1], pixels[i + 2], pixels[i + 3]];
 	}
 };
